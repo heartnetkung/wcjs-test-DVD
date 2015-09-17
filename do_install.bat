@@ -1,0 +1,5 @@
+SET "WCJS_VERSION=v0.1.29"
+SET "WCJS_ARCH=ia32"
+SET "WCJS_RUNTIME=nwjs"
+npm install
+PAUSE
