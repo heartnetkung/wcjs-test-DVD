@@ -1,0 +1,7 @@
+{
+  "name": "wcjs-test-DVD",
+  "main": "app://host/demo2.html",
+  "dependencies": {
+    "wcjs-player": "heartnetkung/wcjs-player"
+  }
+}

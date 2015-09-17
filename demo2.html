@@ -1,0 +1,64 @@
+<html>
+
+<head>
+	<style>
+	body,
+	html {
+		width: 100%;
+		height: 100%;
+		padding: 0px;
+		margin: 0px
+	}
+	
+	#player {
+		width: 100%;
+		height: 100%;
+	}
+	</style>
+</head>
+
+<body>
+	<div id="player"></div>
+	<div>
+		<h3>Control</h3> File Selection:
+		<input id="file" type="file">
+		<br>
+		<br>
+		<form id="mrl-form">
+			MRL Input:
+			<input id="text" type="text">
+		</form>
+	</div>
+	<script src="resource/jquery-1.11.3.min.js"></script>
+	<script>
+	var wjs = require("wcjs-player");
+	var player = new wjs("#player").addPlayer({
+		autoplay: true,
+		vlcArgs: ['-vvv']
+	});
+	
+	//accept input
+	$('#mrl-form').on('submit', function(event) {
+		console.log($(this).find('#text').val());
+		player.addPlaylist($(this).find('#text').val());
+		event.preventDefault();
+	});
+	$('#file').on('change', function() {
+		console.log('file:///' + this.value);
+		player.addPlaylist('file:///' + this.value);
+	});
+	
+	//properly close player
+	var gui = require('nw.gui');
+	var win = gui.Window.get();
+	win.on('close', function() {
+		player.stop();
+		win.hide();
+		setTimeout(function() {
+			win.close(true);
+		}, 1000);
+	});
+	</script>
+</body>
+
+</html>
